@@ -1,0 +1,11 @@
+{
+  "require": {
+    "danog/madelineproto": "^8",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-0": {
+      "App\\": "app/"
+    }
+  }
+}

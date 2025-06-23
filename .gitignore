@@ -1,0 +1,10 @@
+/.idea
+/.vscode
+
+/vendor
+/session.madeline
+
+*.log
+**/*.log
+
+.env
