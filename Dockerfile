@@ -1,9 +1,9 @@
-FROM php:8.3-cli
+FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
-    git unzip wget zip libzip-dev libpq-dev curl build-essential \
+    wget git unzip zip libzip-dev curl libpq-dev build-essential \
     && docker-php-ext-install pcntl
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+WORKDIR /var/www/html
