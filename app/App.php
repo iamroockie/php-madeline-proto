@@ -74,6 +74,46 @@ class App
         $this->api->messages->sendMessage(compact('peer', 'message'));
     }
 
+    public function addContact(array $params = []): void
+    {
+        $this->validateParams($params, ['user_id', 'first_name', 'last_name', 'phone']);
+
+        $this->api->contacts->addContact(
+            id: $params['user_id'],
+            phone: $params['phone'],
+            first_name: $params['first_name'],
+            last_name: $params['last_name']
+        );
+    }
+
+    public function resolvePhone(array $params = []): array
+    {
+        $this->validateParams($params, ['phone']);
+
+        return $this->api->contacts->resolvePhone(
+            phone: $params['phone']
+        );
+    }
+
+    public function getHistory(array $params = []): array
+    {
+        $this->validateParams($params, ['peer']);
+
+        $peer = $params['peer'];
+
+        $req = compact('peer');
+
+        if (!empty($params['limit'])) {
+            $req['limit'] = $params['limit'];
+        }
+
+        if (!empty($params['offset'])) {
+            $req['add_offset'] = $params['offset'];
+        }
+
+        return $this->api->messages->getHistory($req);
+    }
+
     private function validateParams(array $params, array $keys)
     {
         if (empty($params)) {
